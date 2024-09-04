@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TicTacToe</title>
+		<meta charset="utf-8">
+		<style>
+			input{
+				background-color: #FFFFFF;
+				width: 150px;
+				height: 150px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<h1>TicTacToe</h1>
+		<input id = "i0" type="button" value="0" onclick = "b0()">
+		<input id = "i1" type="button" value="1" onclick = "b1()">
+		<input id = "i2" type="button" value="2" onclick = "b2()">
+		<br>
+		<input id = "i3" type="button" value="3" onclick = "b3()">
+		<input id = "i4" type="button" value="4" onclick = "b4()">
+		<input id = "i5" type="button" value="5" onclick = "b5()">
+		<br>
+		<input id = "i6" type="button" value="6" onclick = "b6()">
+		<input id = "i7" type="button" value="7" onclick = "b7()">
+		<input id = "i8" type="button" value="8" onclick = "b8()">
+		<input id = "player" type="hidden" value="0">
+		<script>
+
+		var ins = document.getElementsByTagName("input");
+		var player = document.getElementById("player").value;
+		
+		function b0(){
+			choose(0);
+		}
+
+		function b1(){
+			choose(1);
+		}
+
+		function b2(){
+			choose(2);
+		}
+		
+		function b3(){
+			choose(3);
+		}
+		
+		function b4(){
+			choose(4);
+		}
+		
+		function b5(){
+			choose(5);
+		}
+		
+		function b6(){
+			choose(6);
+		}
+		
+		function b7(){
+			choose(7);
+		}
+		
+		function b8(){
+			choose(8);
+		}
+		
+		function has_won(){
+			for (let i = 0; i< 3; i++){
+				if(ins[i].value == ins[i+3].value && ins[i+3].value == ins[i+6].value){
+					document.getElementsByTagName("h1")[0].innerText = `${ins[i].value} won`;
+					return true;
+				}
+				if(ins[i*3].value == ins[i*3+1].value && ins[i*3+1].value == ins[i*3+2].value){
+					document.getElementsByTagName("h1")[0].innerText = `${ins[i*3].value} won`;
+					return true;
+				}
+			}
+
+			if((ins[0].value == ins[4].value && ins[4].value == ins[8].value) || (ins[2].value == ins[4].value && ins[4].value == ins[6].value)){
+				document.getElementsByTagName("h1")[0].innerText = `${ins[4].value} won`;
+				return true;
+			}
+			
+			return false;
+		}
+
+		function choose(s){
+			
+			if(ins[s].value != "R" && ins[s].value != "B" && !has_won()){
+				
+				//adjust color to player
+				if(player==0){
+					ins[s].style.backgroundColor = "#0000FF";
+					ins[s].value = "B";
+				}
+				else{
+					ins[s].style.backgroundColor = "#FF0000";
+					ins[s].value = "R";
+				}
+				
+				has_won();
+				
+				//adjust player
+				player++;
+				player%=2;
+				console.log(player);
+			}
+			
+			document.getElementById("player").value = player;
+		}
+		</script>
+	</body>
+</html>
