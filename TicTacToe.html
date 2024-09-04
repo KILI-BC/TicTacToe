@@ -69,7 +69,7 @@
 			}
 		
 			function has_won(){
-				for (let i = 0; i< 3; i++){
+				for(let i = 0; i< 3; i++){
 					if(ins[i].value == ins[i+3].value && ins[i+3].value == ins[i+6].value){
 						document.getElementsByTagName("h1")[0].innerText = `${ins[i].value} won`;
 						return true;
@@ -87,8 +87,19 @@
 				return false;
 			}
 
+			function is_tied(){
+				for(let i = 0; i< 9; i++){
+					if(ins[i].value != "R" && ins[i].value != "B"){
+						return false;
+					}
+				}
+
+				document.getElementsByTagName("h1")[0].innerText = `It's tied!`;
+				return true;
+			}
+
 			function choose(s){
-				if(ins[s].value != "R" && ins[s].value != "B" && !has_won()){
+				if(ins[s].value != "R" && ins[s].value != "B" && !has_won() && !is_tied()){
 					//adjust color to player
 					if(player==0){
 						ins[s].style.backgroundColor = "#0000FF";
@@ -100,6 +111,8 @@
 					
 					has_won();
 				
+					is_tied();
+
 					//adjust player
 					player++;
 					player%=2;
