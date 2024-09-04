@@ -29,89 +29,85 @@
 		<input id = "player" type="hidden" value="0">
 		<script>
 
-		var ins = document.getElementsByTagName("input");
-		var player = document.getElementById("player").value;
+			var ins = document.getElementsByTagName("input");
+			var player = document.getElementById("player").value;
 		
-		function b0(){
-			choose(0);
-		}
+			function b0(){
+				choose(0);
+			}
 
-		function b1(){
-			choose(1);
-		}
+			function b1(){
+				choose(1);
+			}
 
-		function b2(){
-			choose(2);
-		}
+			function b2(){
+				choose(2);
+			}
 		
-		function b3(){
-			choose(3);
-		}
+			function b3(){
+				choose(3);
+			}
 		
-		function b4(){
-			choose(4);
-		}
+			function b4(){
+				choose(4);
+			}
 		
-		function b5(){
-			choose(5);
-		}
+			function b5(){
+				choose(5);
+			}
 		
-		function b6(){
-			choose(6);
-		}
+			function b6(){
+				choose(6);
+			}
 		
-		function b7(){
-			choose(7);
-		}
+			function b7(){
+				choose(7);
+			}
 		
-		function b8(){
-			choose(8);
-		}
+			function b8(){
+				choose(8);
+			}
 		
-		function has_won(){
-			for (let i = 0; i< 3; i++){
-				if(ins[i].value == ins[i+3].value && ins[i+3].value == ins[i+6].value){
-					document.getElementsByTagName("h1")[0].innerText = `${ins[i].value} won`;
+			function has_won(){
+				for (let i = 0; i< 3; i++){
+					if(ins[i].value == ins[i+3].value && ins[i+3].value == ins[i+6].value){
+						document.getElementsByTagName("h1")[0].innerText = `${ins[i].value} won`;
+						return true;
+					} else if(ins[i*3].value == ins[i*3+1].value && ins[i*3+1].value == ins[i*3+2].value){
+						document.getElementsByTagName("h1")[0].innerText = `${ins[i*3].value} won`;
+						return true;
+					}
+				}
+
+				if((ins[0].value == ins[4].value && ins[4].value == ins[8].value) || (ins[2].value == ins[4].value && ins[4].value == ins[6].value)){
+					document.getElementsByTagName("h1")[0].innerText = `${ins[4].value} won`;
 					return true;
 				}
-				if(ins[i*3].value == ins[i*3+1].value && ins[i*3+1].value == ins[i*3+2].value){
-					document.getElementsByTagName("h1")[0].innerText = `${ins[i*3].value} won`;
-					return true;
-				}
+			
+				return false;
 			}
 
-			if((ins[0].value == ins[4].value && ins[4].value == ins[8].value) || (ins[2].value == ins[4].value && ins[4].value == ins[6].value)){
-				document.getElementsByTagName("h1")[0].innerText = `${ins[4].value} won`;
-				return true;
-			}
-			
-			return false;
-		}
-
-		function choose(s){
-			
-			if(ins[s].value != "R" && ins[s].value != "B" && !has_won()){
+			function choose(s){
+				if(ins[s].value != "R" && ins[s].value != "B" && !has_won()){
+					//adjust color to player
+					if(player==0){
+						ins[s].style.backgroundColor = "#0000FF";
+						ins[s].value = "B";
+					} else{
+						ins[s].style.backgroundColor = "#FF0000";
+						ins[s].value = "R";
+					}
+					
+					has_won();
 				
-				//adjust color to player
-				if(player==0){
-					ins[s].style.backgroundColor = "#0000FF";
-					ins[s].value = "B";
+					//adjust player
+					player++;
+					player%=2;
+					console.log(player);
 				}
-				else{
-					ins[s].style.backgroundColor = "#FF0000";
-					ins[s].value = "R";
-				}
-				
-				has_won();
-				
-				//adjust player
-				player++;
-				player%=2;
-				console.log(player);
-			}
 			
-			document.getElementById("player").value = player;
-		}
+				document.getElementById("player").value = player;
+			}
 		</script>
 	</body>
 </html>
